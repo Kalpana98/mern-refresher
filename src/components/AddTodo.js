@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { TodoContext } from '../AppContext';
 
-function AddTodo({ addTodo }) {
+function AddTodo() {
 	const [input, setInput] = useState('');
+	const { addTodo } = useContext(TodoContext);
 
 	return (
 		<>
@@ -10,7 +12,14 @@ function AddTodo({ addTodo }) {
 				value={input}
 				onChange={(e) => setInput(e.target.value)}
 			/>
-			<button onClick={() => addTodo(input)}>Add New</button>
+			<button
+				onClick={() => {
+					addTodo(input);
+					setInput('');
+				}}
+			>
+				Add New
+			</button>
 		</>
 	);
 }

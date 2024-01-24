@@ -1,12 +1,17 @@
+import { useContext } from 'react';
+import { TodoContext } from '../AppContext';
 import SingleTodo from './SingleTodo';
 
-function TodoList({ todos, type, displayButton }) {
+function TodoList({ type }) {
+	const { todos } = useContext(TodoContext);
+	const displayTodos = todos.filter((item) => item.status === type);
+
 	return (
 		<>
 			<h2>{type}</h2>
 			<ul>
-				{todos.map((todo, i) => (
-					<SingleTodo key={i} todo={todo} type={type} displayButton={displayButton} />
+				{displayTodos.map((todo, i) => (
+					<SingleTodo key={i} todo={todo} type={type} />
 				))}
 			</ul>
 		</>
